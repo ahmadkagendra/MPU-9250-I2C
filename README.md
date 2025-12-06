@@ -3,18 +3,22 @@ A guide for anyone who wants to study and experiment with MPU 9250 and OLED ssd1
 
 MPU 9250 Datasheet : https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-9250-Register-Map.pdf
 
-This program will display the reading results of the MPU 9250 to the OLED.
+This program will display the reading results of the MPU 9250 to the OLED with I2C communication.
 
 ## Configuration
 IOC Configuration I2C1 , I2C2 and ADC1
+
 ADC Paramteter setting
-![Encoder Mode](img/Screenshot 2025-12-06 133948.png)
+
+![Encoder Mode](img/Screenshot%202025-12-06%20133948.png)
 
 I2C1 MPU Parameter setting
-![Encoder Mode](img/Screenshot 2025-12-06 134007.png)
+
+![Encoder Mode](img/Screenshot%202025-12-06%20134007.png)
 
 I2C2 OLED Parameter setting
-![Encoder Mode](img/Screenshot 2025-12-06 134020.png)
+
+![Encoder Mode](img/Screenshot%202025-12-06%20134020.png)
 
 
 - STM32F4XX OLED 12C connection
