@@ -5,7 +5,19 @@ MPU 9250 Datasheet : https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-9
 
 This program will display the reading results of the MPU 9250 to the OLED.
 
-## STM32F4XX OLED 12C connection
+## Configuration
+IOC Configuration I2C1 , I2C2 and ADC1
+ADC Paramteter setting
+![Encoder Mode](images/Screenshot 2025-12-06 133948.png)
+
+I2C1 MPU Parameter setting
+![Encoder Mode](images/Screenshot 2025-12-06 134007.png)
+
+I2C2 OLED Parameter setting
+![Encoder Mode](images/Screenshot 2025-12-06 134020.png)
+
+
+- STM32F4XX OLED 12C connection
 ```
 3V3 -> VCC
 G -> GND
@@ -13,7 +25,7 @@ I2C2 (SCL/B10) -> SCL
 I2C2 (SDA/B3) -> SDA
 ```
 
-## STM32F4XX MPU 9250 I2C connection
+- STM32F4XX MPU 9250 I2C connection
 ```
 3V3 -> VCC
 G -> GND
