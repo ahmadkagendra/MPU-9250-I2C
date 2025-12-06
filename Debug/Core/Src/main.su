@@ -1,0 +1,7 @@
+../Core/Src/main.c:91:6:MPU_Init	32	static
+../Core/Src/main.c:122:6:MPU_Read_ACCEL	40	static
+../Core/Src/main.c:145:6:MPU_Calib_ACCEL	32	static
+../Core/Src/main.c:176:5:main	232	static
+../Core/Src/main.c:295:6:SystemClock_Config	88	static
+../Core/Src/main.c:337:6:HAL_ADC_ConvCpltCallback	16	static
+../Core/Src/main.c:350:6:Error_Handler	4	static,ignoring_inline_asm
