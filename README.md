@@ -8,13 +8,13 @@ This program will display the reading results of the MPU 9250 to the OLED.
 ## Configuration
 IOC Configuration I2C1 , I2C2 and ADC1
 ADC Paramteter setting
-![Encoder Mode](images/Screenshot 2025-12-06 133948.png)
+![Encoder Mode](img/Screenshot 2025-12-06 133948.png)
 
 I2C1 MPU Parameter setting
-![Encoder Mode](images/Screenshot 2025-12-06 134007.png)
+![Encoder Mode](img/Screenshot 2025-12-06 134007.png)
 
 I2C2 OLED Parameter setting
-![Encoder Mode](images/Screenshot 2025-12-06 134020.png)
+![Encoder Mode](img/Screenshot 2025-12-06 134020.png)
 
 
 - STM32F4XX OLED 12C connection
