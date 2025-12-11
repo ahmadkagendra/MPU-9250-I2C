@@ -40,11 +40,10 @@ I2C1 (SDA/B7) -> SDA
 ## Create Global Variabel
 
 Create a global variable like this to store the reading value MPU9250.
-
+- `aX_RAW, aY_RAW, aZ_RAW, adcRAW[2] tempRAW` Raw data read.
+- `aX, aY, aZ, aRoll, aPitch, tempMPU, aX1, aY1, aZ1` Data result.
 ```c
-// RAW DATA
 int16_t aX_RAW, aY_RAW, aZ_RAW, adcRAW[2], aX0, aY0, aZ0, tempRAW;
-// FINAL RESULT
 float aX, aY, aZ, aRoll, aPitch, tempMPU, aX1, aY1, aZ1;
 ```
 
@@ -62,7 +61,7 @@ double newTemperature;
 
 ## Define constant variable
 
-- Temperature ADC value
+### Temperature ADC value
 
 ```c
 #define VREFINT 1.21
@@ -71,7 +70,8 @@ double newTemperature;
 #define AVG_SLOPE 0.0025
 #define alpha 0.1
 ```
-- MPU 9250 address used
+### MPU 9250 address used
+- Used `MPU_ADDR` address `0xD0` if pin AD0 is GND and use address `0xD2` if pin AD0 is VCC. Address `0xD0` is recommended
 
 ```c
 #define MPU_ADDR 0xD0
@@ -83,9 +83,29 @@ double newTemperature;
 ```
 
 ## MPU 9250 Initial function
-
+- `WHO_AM_I_REG` Read  I2C Connection : return `0x71` or `113` meaning the connection was successful.
 - Change the `HAL_MAX_DELAY` value to set the I2C interrupt time.
-
+- `SMPLRT_DIV_REG` address to configure sample rate. `Sample Rate = 1000 Hz / (1 + SMPLRT_DIV)`.
+#### Example : 0x07
+```
+07 Hex = 7 Dec
+Sample Rate = 1000 Hz / (1 + 7)
+Sample Rate = 1000 Hz / 8
+Sample Rate = 125 Hz
+```
+#### Example : 0x13
+```
+13 Hex = 19 Dec
+Sample Rate = 1000 Hz / (1 + 19)
+Sample Rate = 1000 Hz / 20
+Sample Rate = 50 Hz
+```
+- `ACCEL_CONFIG_REG` address to configure accelerometer
+![Encoder Mode](img/Accel%20config.png)
+#### Example : use 4g
+Bin = 00001000 
+#### Example : use 8g
+Bin = 00010000
 ```c
 void MPU_Init ()
 {
@@ -97,15 +117,12 @@ void MPU_Init ()
 	if (check == 104)
 
 	{
-        // Wake up sensor
 		data = 0;
 		HAL_I2C_Mem_Write(&hi2c1, MPU_ADDR, PWR_MGMT_1_REG, 1, &data, 1, HAL_MAX_DELAY);
 
-        // Set sample rate Divider
 		data = 0x07;
 		HAL_I2C_Mem_Write(&hi2c1, MPU_ADDR, SMPLRT_DIV_REG, 1, &data, 1, HAL_MAX_DELAY);
 
-        // 
 		data = 0b00001100;
 		HAL_I2C_Mem_Write(&hi2c1, MPU_ADDR, ACCEL_CONFIG_REG, 1, &data, 1, HAL_MAX_DELAY);
 
@@ -116,10 +133,8 @@ void MPU_Init ()
 
 ## Accelerometer and Temperature MPU 9250 Read Function
 
-- MPU9250 Temperature conversion formula : 
-Temp (°C) = (TEMP_OUT / 340) + 36.53
+- MPU9250 Temperature conversion formula : `Temp (°C) = (TEMP_OUT / 340) + 36.53`
 - Variabel `aX` , `aY` , `aZ` Contains the final results of the sensor reading taking into account the offset 
-
 ```c
 void MPU_Read_ACCEL ()
 {
@@ -145,6 +160,17 @@ void MPU_Read_ACCEL ()
 
 }
 ```
+### Roll
+#### MPU9250 Perspective Axis
+![Encoder Mode](img/Roll1.jpeg)
+#### MPU9250 Roll Reading value
+![Encoder Mode](img/Roll2.jpeg)
+### Pitch
+#### MPU9250 Perspective Axis
+![Encoder Mode](img/Pitch1.jpeg)
+#### MPU9250 Pitch Reading value
+![Encoder Mode](img/Pitch2.jpeg)
+
 
 ## Accelerometer Calib Function
 
